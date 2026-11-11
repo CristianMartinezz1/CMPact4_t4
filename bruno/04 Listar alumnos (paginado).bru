@@ -1,0 +1,31 @@
+meta {
+  name: 04 Listar alumnos (paginado)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/alumnos?page=0&size=5&sort=nombre
+  body: none
+  auth: bearer
+}
+
+params:query {
+  page: 0
+  size: 5
+  sort: nombre
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+tests {
+  test("200 OK", function() {
+    expect(res.status).to.equal(200);
+  });
+  test("Respuesta paginada", function() {
+    expect(res.body).to.have.property("contenido");
+    expect(res.body).to.have.property("totalPaginas");
+  });
+}

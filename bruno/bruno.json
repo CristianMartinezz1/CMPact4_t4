@@ -1,0 +1,6 @@
+{
+  "version": "1",
+  "name": "CMPact4_t4 - API Alumnos JWT",
+  "type": "collection",
+  "ignore": ["node_modules", ".git"]
+}

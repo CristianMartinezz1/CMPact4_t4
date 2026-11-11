@@ -1,0 +1,24 @@
+meta {
+  name: 13 Login incorrecto (401)
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{email}}",
+    "password": "contrasena-equivocada"
+  }
+}
+
+tests {
+  test("401 Unauthorized", function() {
+    expect(res.status).to.equal(401);
+  });
+}

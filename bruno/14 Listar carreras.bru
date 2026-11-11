@@ -1,0 +1,21 @@
+meta {
+  name: 14 Listar carreras
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/api/carreras
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+tests {
+  test("200 OK", function() {
+    expect(res.status).to.equal(200);
+  });
+}

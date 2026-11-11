@@ -1,0 +1,21 @@
+meta {
+  name: 09 Ver alumno eliminado (404)
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/api/alumnos/{{alumnoId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+tests {
+  test("404 Not Found", function() {
+    expect(res.status).to.equal(404);
+  });
+}

@@ -1,0 +1,21 @@
+meta {
+  name: 11 Token invalido (401)
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{baseUrl}}/api/alumnos
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWxzbyJ9.firmaFalsa
+}
+
+tests {
+  test("401 Unauthorized", function() {
+    expect(res.status).to.equal(401);
+  });
+}

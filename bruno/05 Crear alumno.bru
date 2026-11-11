@@ -1,0 +1,40 @@
+meta {
+  name: 05 Crear alumno
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/alumnos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "matricula": "23169990",
+    "nombre": "Alumno de Prueba Bruno",
+    "email": "bruno@ejemplo.com",
+    "semestre": 4,
+    "carreraId": 1
+  }
+}
+
+script:post-response {
+  if (res.status === 201) {
+    bru.setVar("alumnoId", res.body.id);
+  }
+}
+
+tests {
+  test("201 Created", function() {
+    expect(res.status).to.equal(201);
+  });
+  test("Incluye su carrera", function() {
+    expect(res.body.carrera.nombre).to.be.a("string");
+  });
+}

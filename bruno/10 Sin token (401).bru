@@ -1,0 +1,21 @@
+meta {
+  name: 10 Sin token (401)
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/api/alumnos
+  body: none
+  auth: none
+}
+
+tests {
+  test("401 Unauthorized", function() {
+    expect(res.status).to.equal(401);
+  });
+}
+
+docs {
+  Llama a un endpoint protegido SIN el header Authorization. Spring Security debe rechazarlo con 401.
+}

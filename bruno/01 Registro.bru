@@ -1,0 +1,32 @@
+meta {
+  name: 01 Registro
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Cristian Martínez Pacheco",
+    "email": "{{email}}",
+    "password": "{{password}}"
+  }
+}
+
+tests {
+  test("201 Created (o 409 si la cuenta ya existe)", function() {
+    expect([201, 409]).to.include(res.status);
+  });
+  test("Nunca regresa el password", function() {
+    expect(res.body).to.not.have.property("password");
+  });
+}
+
+docs {
+  Crea una cuenta. Ruta pública. La contraseña se guarda cifrada con BCrypt y la respuesta no la incluye.
+}

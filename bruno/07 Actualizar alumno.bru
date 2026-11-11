@@ -1,0 +1,34 @@
+meta {
+  name: 07 Actualizar alumno
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{baseUrl}}/api/alumnos/{{alumnoId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "matricula": "23169990",
+    "nombre": "Alumno de Prueba Bruno (editado)",
+    "email": "bruno@ejemplo.com",
+    "semestre": 5,
+    "carreraId": 2
+  }
+}
+
+tests {
+  test("200 OK", function() {
+    expect(res.status).to.equal(200);
+  });
+  test("Cambió de carrera", function() {
+    expect(res.body.carrera.id).to.equal(2);
+  });
+}
